@@ -1,0 +1,1247 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière — Spa & Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --ivory: #ede8e0;
+    --warm-white: #faf8f5;
+    --charcoal: #1c1a18;
+    --muted: #6b6560;
+    --gold: #b89a5a;
+    --gold-light: #d4b87a;
+    --rose: #c4897a;
+    --sage: #8a9e8c;
+    --border: rgba(184,154,90,0.25);
+    --shadow: 0 4px 40px rgba(28,26,24,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(250,248,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; letter-spacing: 0.2em;
+    color: var(--charcoal); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 0.78rem;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--charcoal); color: var(--cream);
+    border: none; padding: 10px 24px; font-family: 'Jost', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+    padding: 100px 48px 60px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -80px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(184,154,90,0.12) 0%, transparent 70%);
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px; font-weight: 400;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.08;
+    color: var(--charcoal); margin-bottom: 28px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 0.95rem; color: var(--muted); line-height: 1.7;
+    max-width: 420px; margin-bottom: 44px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-actions { display: flex; gap: 16px; animation: fadeUp 0.8s 0.3s ease both; }
+  .btn-primary {
+    background: var(--gold); color: var(--charcoal);
+    border: none; padding: 15px 36px;
+    font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s; font-weight: 400;
+  }
+  .btn-primary:hover { background: var(--charcoal); color: var(--cream); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--charcoal);
+    border: 1px solid var(--charcoal); padding: 15px 36px;
+    font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s; font-weight: 400;
+  }
+  .btn-ghost:hover { background: var(--charcoal); color: var(--cream); }
+
+  .hero-visual {
+    position: relative; display: flex; justify-content: center;
+    animation: fadeIn 1.2s 0.4s ease both;
+  }
+  .hero-card-stack { position: relative; width: 340px; height: 440px; }
+  .hero-card {
+    position: absolute; border-radius: 2px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .hero-card-main {
+    width: 300px; height: 400px; top: 20px; left: 20px;
+    background: linear-gradient(160deg, #e8dfd4 0%, #d4c9bc 100%);
+    display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 28px;
+    overflow: hidden;
+  }
+  .hero-card-main::before {
+    content: '✦';
+    position: absolute; top: 28px; right: 28px;
+    font-size: 1.6rem; color: var(--gold); opacity: 0.6;
+  }
+  .hero-card-accent {
+    width: 220px; height: 280px; top: 80px; left: -30px;
+    background: var(--charcoal);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center; padding: 24px;
+  }
+  .card-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--cream); font-weight: 300;
+    line-height: 1.2; text-align: center;
+  }
+  .card-stat {
+    font-size: 2.8rem; font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; color: var(--gold); margin-top: 16px;
+  }
+
+  /* ── GUARANTEE STRIP ── */
+  .strip {
+    background: var(--charcoal); padding: 18px 48px;
+    display: flex; justify-content: center; gap: 60px;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ivory); font-weight: 400;
+  }
+  .strip-item .dot { color: var(--gold); font-size: 1rem; }
+
+  /* ── SERVICES ── */
+  .services { padding: 100px 48px; background: var(--warm-white); }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; font-weight: 400;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300;
+    color: var(--charcoal); line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--muted); }
+  .section-sub {
+    font-size: 0.9rem; color: var(--muted); margin-top: 16px;
+    line-height: 1.7; max-width: 520px; margin-inline: auto;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .service-card {
+    background: var(--cream); border: 1px solid var(--border);
+    padding: 40px 32px; position: relative; cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .service-card.featured {
+    background: var(--charcoal); border-color: var(--charcoal);
+    grid-row: span 1;
+  }
+  .service-icon {
+    font-size: 1.8rem; margin-bottom: 20px;
+    display: block;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; margin-bottom: 10px;
+    color: var(--charcoal);
+  }
+  .service-card.featured .service-name { color: var(--cream); }
+  .service-desc {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .service-card.featured .service-desc { color: rgba(237,232,224,0.7); }
+  .service-duration {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+  }
+  .service-price {
+    position: absolute; top: 32px; right: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--gold);
+  }
+
+  /* ── PRICING TABLE ── */
+  .pricing-section {
+    padding: 100px 48px; background: var(--ivory);
+  }
+  .pricing-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .pricing-table {
+    background: var(--cream); border: 1px solid var(--border);
+    padding: 40px;
+    box-shadow: var(--shadow);
+  }
+  .pricing-table h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--charcoal); margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .pricing-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
+  .pricing-item:last-child { border-bottom: none; }
+  .pricing-name {
+    flex: 1; font-size: 0.9rem; color: var(--charcoal);
+  }
+  .pricing-duration {
+    font-size: 0.75rem; color: var(--muted); margin-right: 16px;
+  }
+  .pricing-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--gold); font-weight: 400;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how { padding: 100px 48px; background: var(--ivory); }
+  .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; max-width: 1000px; margin: 0 auto; }
+  .step { padding: 40px 28px; position: relative; text-align: center; }
+  .step:not(:last-child)::after {
+    content: '→';
+    position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+    color: var(--gold); font-size: 1.2rem; opacity: 0.5;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300; color: var(--border);
+    line-height: 1; margin-bottom: 16px;
+    display: block;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 400; margin-bottom: 10px;
+    color: var(--charcoal);
+  }
+  .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── BOOKING WIDGET ── */
+  .booking-section {
+    padding: 100px 48px;
+    background: var(--warm-white);
+  }
+  .booking-container {
+    max-width: 860px; margin: 0 auto;
+    background: var(--cream); border: 1px solid var(--border);
+    box-shadow: 0 8px 60px rgba(28,26,24,0.10);
+  }
+  .booking-header {
+    background: var(--charcoal); padding: 36px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .booking-header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--cream); font-weight: 300;
+  }
+  .booking-header-note {
+    font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(237,232,224,0.6);
+    text-transform: uppercase;
+  }
+  .booking-body { padding: 48px; }
+
+  /* Progress */
+  .progress-bar {
+    display: flex; align-items: center; margin-bottom: 48px;
+  }
+  .progress-step {
+    display: flex; flex-direction: column; align-items: center; flex: 1;
+    cursor: pointer;
+  }
+  .progress-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; color: var(--muted); background: var(--warm-white);
+    transition: all 0.3s; margin-bottom: 8px; font-weight: 400;
+  }
+  .progress-step.active .progress-circle {
+    background: var(--gold); border-color: var(--gold); color: var(--charcoal);
+  }
+  .progress-step.done .progress-circle {
+    background: var(--charcoal); border-color: var(--charcoal); color: var(--cream);
+  }
+  .progress-label {
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .progress-step.active .progress-label { color: var(--gold); }
+  .progress-line {
+    flex: 1; height: 1px; background: var(--border); margin: 0 8px 28px;
+  }
+
+  /* Step panels */
+  .step-panel { display: none; }
+  .step-panel.active { display: block; animation: fadeUp 0.4s ease both; }
+
+  .field-group { margin-bottom: 28px; }
+  .field-label {
+    display: block; font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .field-select, .field-input {
+    width: 100%; padding: 14px 18px;
+    background: var(--warm-white); border: 1px solid var(--border);
+    font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--charcoal);
+    font-weight: 300; appearance: none;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .field-select:focus, .field-input:focus { border-color: var(--gold); }
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '⌄'; position: absolute; right: 16px; top: 50%; transform: translateY(-52%);
+    color: var(--gold); pointer-events: none; font-size: 1.1rem;
+  }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* Time grid */
+  .time-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-top: 8px;
+  }
+  .time-slot {
+    padding: 12px 8px; text-align: center;
+    border: 1px solid var(--border); background: var(--warm-white);
+    font-size: 0.82rem; color: var(--charcoal); cursor: pointer;
+    transition: all 0.2s; font-weight: 300;
+  }
+  .time-slot:hover { border-color: var(--gold); color: var(--gold); }
+  .time-slot.selected { background: var(--gold); border-color: var(--gold); color: var(--charcoal); font-weight: 500; }
+  .time-slot.unavailable { opacity: 0.35; cursor: not-allowed; background: var(--ivory); }
+
+  /* Availability indicator */
+  .avail-notice {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(138,158,140,0.12); border: 1px solid rgba(138,158,140,0.3);
+    padding: 14px 20px; margin-bottom: 28px; font-size: 0.82rem; color: var(--charcoal);
+  }
+  .avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+
+  /* Guest add-ons */
+  .addon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .addon-card {
+    border: 1px solid var(--border); padding: 16px 18px;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px;
+  }
+  .addon-card:hover { border-color: var(--gold); }
+  .addon-card.selected { border-color: var(--gold); background: rgba(184,154,90,0.06); }
+  .addon-check {
+    width: 18px; height: 18px; border: 1px solid var(--border);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; transition: all 0.2s;
+  }
+  .addon-card.selected .addon-check { background: var(--gold); border-color: var(--gold); color: var(--charcoal); }
+  .addon-text { flex: 1; }
+  .addon-name { font-size: 0.85rem; color: var(--charcoal); margin-bottom: 2px; }
+  .addon-price { font-size: 0.75rem; color: var(--gold); }
+
+  /* Summary */
+  .summary-box {
+    background: var(--charcoal); padding: 28px 32px; margin-bottom: 28px;
+  }
+  .summary-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--cream); margin-bottom: 20px; font-weight: 300;
+  }
+  .summary-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px; font-size: 0.85rem;
+  }
+  .summary-key { color: rgba(237,232,224,0.6); }
+  .summary-val { color: var(--cream); }
+  .summary-divider { height: 1px; background: rgba(184,154,90,0.2); margin: 16px 0; }
+  .summary-total .summary-key { color: var(--gold); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .summary-total .summary-val { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); }
+
+  /* Nav buttons */
+  .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; }
+  .btn-back {
+    background: transparent; border: 1px solid var(--border); color: var(--muted);
+    padding: 13px 28px; font-family: 'Jost', sans-serif; font-size: 0.76rem;
+    letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s; font-weight: 400;
+  }
+  .btn-back:hover { border-color: var(--charcoal); color: var(--charcoal); }
+  .btn-next {
+    background: var(--gold); border: none; color: var(--charcoal);
+    padding: 15px 40px; font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s; font-weight: 400;
+  }
+  .btn-next:hover { background: var(--charcoal); color: var(--cream); }
+
+  /* Confirmation */
+  .confirmation {
+    text-align: center; padding: 20px 0;
+    display: none;
+  }
+  .confirmation.active { display: block; animation: fadeUp 0.5s ease both; }
+  .confirm-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--sage); color: white; font-size: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .confirm-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; margin-bottom: 12px;
+  }
+  .confirm-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.7; max-width: 420px; margin: 0 auto 32px; }
+  .confirm-ref {
+    display: inline-block; padding: 10px 24px;
+    border: 1px solid var(--gold); color: var(--gold);
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  /* ── POLICIES ── */
+  .policies {
+    padding: 80px 48px; background: var(--ivory);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .policy-card { padding: 0; }
+  .policy-icon { font-size: 1.4rem; margin-bottom: 14px; display: block; }
+  .policy-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400; margin-bottom: 10px;
+  }
+  .policy-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal); padding: 60px 48px 32px;
+    color: rgba(237,232,224,0.5);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--cream); font-weight: 300;
+    letter-spacing: 0.15em; margin-bottom: 16px; display: block;
+  }
+  .footer-logo span { color: var(--gold); font-style: italic; }
+  .footer-desc { font-size: 0.83rem; line-height: 1.65; }
+  .footer-col-title {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; font-weight: 400;
+  }
+  .footer-col a {
+    display: block; text-decoration: none; color: rgba(237,232,224,0.5);
+    font-size: 0.85rem; margin-bottom: 10px; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid rgba(184,154,90,0.15); padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 90px 24px 60px; }
+    .hero-visual { display: none; }
+    .services { padding: 60px 24px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .booking-section { padding: 60px 24px; }
+    .booking-body { padding: 28px 24px; }
+    .booking-header { padding: 24px; flex-direction: column; gap: 8px; }
+    .steps { grid-template-columns: 1fr; }
+    .step:not(:last-child)::after { display: none; }
+    .field-row { grid-template-columns: 1fr; }
+    .time-grid { grid-template-columns: repeat(3, 1fr); }
+    .addon-grid { grid-template-columns: 1fr; }
+    .policies { grid-template-columns: 1fr; padding: 60px 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .strip { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Lumi<span>ère</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#booking">Book</a>
+    <a href="#policies">Policies</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Reserve Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">✦ Exclusive Spa & Salon Experience</p>
+    <h1 class="hero-title">
+      Your time is<br><em>sacred.</em><br>We protect it.
+    </h1>
+    <p class="hero-sub">
+      Extended 2–6 hour appointments, reserved exclusively for you. No crowds, no waiting, no compromises — just pure restoration from the moment you arrive.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Your Escape</button>
+      <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View Pricing</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="hero-card hero-card-main">
+        <p class="card-label">Your session</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--charcoal);font-weight:300;line-height:1.3">Grand Ritual Package<br><em style="font-size:0.9rem;color:var(--muted)">4 hours · Private suite</em></p>
+      </div>
+      <div class="hero-card hero-card-accent">
+        <span class="card-label">Capacity limit</span>
+        <span class="card-title">Private Suite Only</span>
+        <span class="card-stat">1:1</span>
+        <span style="font-size:0.7rem;letter-spacing:0.12em;color:rgba(212,184,122,0.6);text-transform:uppercase;margin-top:6px">Guaranteed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="dot">✦</span> No overbooking — ever</div>
+  <div class="strip-item"><span class="dot">✦</span> 2–6 hour exclusive sessions</div>
+  <div class="strip-item"><span class="dot">✦</span> Private suites available</div>
+  <div class="strip-item"><span class="dot">✦</span> Confirmation within 60 seconds</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <p class="section-eyebrow">Our offerings</p>
+    <h2 class="section-title">Rituals crafted for<br><em>deep renewal</em></h2>
+    <p class="section-sub">Each service is a full-length experience, never rushed, never shared. We reserve your suite for you alone.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card featured">
+      <span class="service-icon">🌿</span>
+      <p class="service-price">UGX 150,000</p>
+      <h3 class="service-name">Grand Ritual</h3>
+      <p class="service-desc">Our signature full-day experience — massage, facial, body wrap, hair, and nails — all in your private suite with a dedicated concierge.</p>
+      <span class="service-duration">⏱ 5–6 hours</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💆</span>
+      <p class="service-price">UGX 45,000</p>
+      <h3 class="service-name">Deep Restoration Massage</h3>
+      <p class="service-desc">Hot stone, deep tissue, or lymphatic — extended sessions with zero interruption in a temperature-controlled room.</p>
+      <span class="service-duration">⏱ 2–3 hours</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">✨</span>
+      <p class="service-price">UGX 55,000</p>
+      <h3 class="service-name">Luminous Skin Journey</h3>
+      <p class="service-desc">Custom facial protocol with advanced serums, LED therapy, and a scalp massage — crafted for your unique skin goals.</p>
+      <span class="service-duration">⏱ 2–4 hours</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💇</span>
+      <p class="service-price">UGX 50,000</p>
+      <h3 class="service-name">Hair Atelier</h3>
+      <p class="service-desc">Precision cuts, colour, keratin treatments, and blowouts — booked in a private chair with undivided artisan attention.</p>
+      <span class="service-duration">⏱ 2–3 hours</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💅</span>
+      <p class="service-price">UGX 35,000</p>
+      <h3 class="service-name">Nail & Hand Ritual</h3>
+      <p class="service-desc">Manicure, pedicure, and hand treatment elevated into a full sensory ritual with aromatherapy and warm paraffin wraps.</p>
+      <span class="service-duration">⏱ 2 hours</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🛁</span>
+      <p class="service-price">UGX 100,000</p>
+      <h3 class="service-name">Couples Retreat</h3>
+      <p class="service-desc">A shared sanctuary — side-by-side treatments in our couples suite with champagne, robes, and a private hydrotherapy pool.</p>
+      <span class="service-duration">⏱ 3–4 hours</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-header">
+    <p class="section-eyebrow">Complete Pricing</p>
+    <h2 class="section-title">Transparent rates for<br><em>every treatment</em></h2>
+    <p class="section-sub">All prices in UGX. Each service includes private suite access and dedicated therapist attention.</p>
+  </div>
+  <div class="pricing-grid">
+    <!-- Spa Treatments -->
+    <div class="pricing-table">
+      <h3>🌿 Spa Treatments</h3>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Grand Ritual</div>
+          <div class="pricing-duration">5–6 hours</div>
+        </div>
+        <div class="pricing-price">UGX 150,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Deep Restoration Massage</div>
+          <div class="pricing-duration">2–3 hours</div>
+        </div>
+        <div class="pricing-price">UGX 45,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Luminous Skin Journey</div>
+          <div class="pricing-duration">2–4 hours</div>
+        </div>
+        <div class="pricing-price">UGX 55,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Body Wrap Experience</div>
+          <div class="pricing-duration">1.5–2 hours</div>
+        </div>
+        <div class="pricing-price">UGX 35,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Facial Rejuvenation</div>
+          <div class="pricing-duration">1.5 hours</div>
+        </div>
+        <div class="pricing-price">UGX 30,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Couples Retreat</div>
+          <div class="pricing-duration">3–4 hours</div>
+        </div>
+        <div class="pricing-price">UGX 100,000</div>
+      </div>
+    </div>
+
+    <!-- Hair Services -->
+    <div class="pricing-table">
+      <h3>💇 Hair Atelier</h3>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Hair Atelier (Full Service)</div>
+          <div class="pricing-duration">2–3 hours</div>
+        </div>
+        <div class="pricing-price">UGX 50,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Precision Cut</div>
+          <div class="pricing-duration">45 mins – 1 hour</div>
+        </div>
+        <div class="pricing-price">UGX 25,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Hair Colour Service</div>
+          <div class="pricing-duration">1.5–2.5 hours</div>
+        </div>
+        <div class="pricing-price">UGX 60,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Keratin Treatment</div>
+          <div class="pricing-duration">2 hours</div>
+        </div>
+        <div class="pricing-price">UGX 75,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Blowout & Styling</div>
+          <div class="pricing-duration">1 hour</div>
+        </div>
+        <div class="pricing-price">UGX 20,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Scalp Treatment</div>
+          <div class="pricing-duration">30–45 mins</div>
+        </div>
+        <div class="pricing-price">UGX 15,000</div>
+      </div>
+      <div class="pricing-item">
+        <div>
+          <div class="pricing-name">Hair Extensions</div>
+          <div class="pricing-duration">2–3 hours</div>
+        </div>
+        <div class="pricing-price">UGX 120,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-header">
+    <p class="section-eyebrow">Reservation process</p>
+    <h2 class="section-title">How we <em>protect your time</em></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01</span>
+      <h3 class="step-title">Choose & Design</h3>
+      <p class="step-desc">Select your service, duration, and any add-ons you'd like. Each booking is custom-configured.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <h3 class="step-title">Pick Your Slot</h3>
+      <p class="step-desc">We show only genuinely available times. No false availability — if it's shown, it's yours.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <h3 class="step-title">Confirm & Secure</h3>
+      <p class="step-desc">A small deposit holds your suite. We'll never overbook or double-assign your reservation.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">04</span>
+      <h3 class="step-title">Arrive & Restore</h3>
+      <p class="step-desc">Walk in to your name on the door, robe ready, and a team dedicated entirely to you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div class="section-header">
+    <p class="section-eyebrow">Reservation</p>
+    <h2 class="section-title">Reserve your <em>private suite</em></h2>
+  </div>
+
+  <div class="booking-container">
+    <div class="booking-header">
+      <h3 class="booking-header-title">Book Your Experience</h3>
+      <p class="booking-header-note">Instant confirmation · No overbooking</p>
+    </div>
+    <div class="booking-body" id="bookingBody">
+
+      <!-- PROGRESS -->
+      <div class="progress-bar">
+        <div class="progress-step active" id="ps1">
+          <div class="progress-circle">1</div>
+          <span class="progress-label">Service</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="ps2">
+          <div class="progress-circle">2</div>
+          <span class="progress-label">Date & Time</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="ps3">
+          <div class="progress-circle">3</div>
+          <span class="progress-label">Add-ons</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="ps4">
+          <div class="progress-circle">4</div>
+          <span class="progress-label">Details</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="ps5">
+          <div class="progress-circle">5</div>
+          <span class="progress-label">Confirm</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Service -->
+      <div class="step-panel active" id="panel1">
+        <div class="field-group">
+          <label class="field-label">Select Service</label>
+          <div class="select-wrap">
+            <select class="field-select" id="svcSelect">
+              <option value="">— Choose your ritual —</option>
+              <option value="grand">Grand Ritual — 5–6 hrs · UGX 150,000</option>
+              <option value="massage">Deep Restoration Massage — 2–3 hrs · UGX 45,000</option>
+              <option value="facial">Luminous Skin Journey — 2–4 hrs · UGX 55,000</option>
+              <option value="hair">Hair Atelier — 2–3 hrs · UGX 50,000</option>
+              <option value="nails">Nail & Hand Ritual — 2 hrs · UGX 35,000</option>
+              <option value="couples">Couples Retreat — 3–4 hrs · UGX 100,000</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Preferred Duration</label>
+          <div class="select-wrap">
+            <select class="field-select" id="durationSelect">
+              <option value="">— Select duration —</option>
+              <option value="2">2 hours</option>
+              <option value="3">3 hours</option>
+              <option value="4">4 hours</option>
+              <option value="5">5 hours</option>
+              <option value="6">6 hours (full day)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Suite Preference</label>
+          <div class="select-wrap">
+            <select class="field-select" id="suiteSelect">
+              <option value="private">Private Suite (1 person)</option>
+              <option value="couples">Couples Suite (2 persons)</option>
+              <option value="vip">VIP Penthouse Suite</option>
+            </select>
+          </div>
+        </div>
+        <div class="step-nav">
+          <span></span>
+          <button class="btn-next" onclick="goStep(2)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Date & Time -->
+      <div class="step-panel" id="panel2">
+        <div class="avail-notice">
+          <div class="avail-dot"></div>
+          <span>Real-time availability shown. Each slot is exclusively reserved — no overlap, no crowding.</span>
+        </div>
+        <div class="field-row" style="margin-bottom:28px">
+          <div class="field-group" style="margin:0">
+            <label class="field-label">Date</label>
+            <input type="date" class="field-input" id="dateInput" min="">
+          </div>
+          <div class="field-group" style="margin:0">
+            <label class="field-label">Preferred Therapist</label>
+            <div class="select-wrap">
+              <select class="field-select">
+                <option>No preference</option>
+                <option>Amara L. — Lead Therapist</option>
+                <option>Celeste M. — Skin Expert</option>
+                <option>Noah R. — Hair Artisan</option>
+                <option>Isla V. — Nail Specialist</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Available Start Times</label>
+          <div class="time-grid">
+            <div class="time-slot unavailable">8:00 AM</div>
+            <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
+            <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
+            <div class="time-slot unavailable">11:00 AM</div>
+            <div class="time-slot" onclick="selectTime(this)">12:00 PM</div>
+            <div class="time-slot" onclick="selectTime(this)">1:00 PM</div>
+            <div class="time-slot unavailable">2:00 PM</div>
+            <div class="time-slot" onclick="selectTime(this)">3:00 PM</div>
+            <div class="time-slot" onclick="selectTime(this)">4:00 PM</div>
+            <div class="time-slot unavailable">5:00 PM</div>
+            <div class="time-slot" onclick="selectTime(this)">6:00 PM</div>
+            <div class="time-slot unavailable">7:00 PM</div>
+          </div>
+          <p style="font-size:0.72rem;color:var(--muted);margin-top:12px">⬛ Greyed slots are already reserved. We never double-book.</p>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" onclick="goStep(1)">← Back</button>
+          <button class="btn-next" onclick="goStep(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Add-ons -->
+      <div class="step-panel" id="panel3">
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px;line-height:1.6">Enhance your session with curated add-ons, all prepared before your arrival so there's no interruption to your experience.</p>
+        <div class="addon-grid">
+          <div class="addon-card" onclick="toggleAddon(this)">
+            <div class="addon-check">✓</div>
+            <div class="addon-text">
+              <div class="addon-name">🥂 Welcome Juice & Snacks</div>
+              <div class="addon-price">+UGX 8,750</div>
+            </div>
+          </div>
+          <div class="addon-card" onclick="toggleAddon(this)">
+            <div class="addon-check">✓</div>
+            <div class="addon-text">
+              <div class="addon-name">🌹 Aromatherapy Upgrade</div>
+              <div class="addon-price">+UGX 11,250</div>
+            </div>
+          </div>
+          <div class="addon-card" onclick="toggleAddon(this)">
+            <div class="addon-check">✓</div>
+            <div class="addon-text">
+              <div class="addon-name">🍃 Herbal Tea & Light Snack</div>
+              <div class="addon-price">+UGX 13,750</div>
+            </div>
+          </div>
+          <div class="addon-card" onclick="toggleAddon(this)">
+            <div class="addon-check">✓</div>
+            <div class="addon-text">
+              <div class="addon-name">📸 Glow Photo Session</div>
+              <div class="addon-price">+UGX 18,750</div>
+            </div>
+          </div>
+          <div class="addon-card" onclick="toggleAddon(this)">
+            <div class="addon-check">✓</div>
+            <div class="addon-text">
+              <div class="addon-name">🧴 Personalised Product Kit</div>
+              <div class="addon-price">+UGX 22,500</div>
+            </div>
+          </div>
+          <div class="addon-card" onclick="toggleAddon(this)">
+            <div class="addon-check">✓</div>
+            <div class="addon-text">
+              <div class="addon-name">🚗 Complimentary Parking</div>
+              <div class="addon-price">+UGX 6,250</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" onclick="goStep(2)">← Back</button>
+          <button class="btn-next" onclick="goStep(4)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Details -->
+      <div class="step-panel" id="panel4">
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label">First Name</label>
+            <input type="text" class="field-input" placeholder="Your first name">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Last Name</label>
+            <input type="text" class="field-input" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label">Email</label>
+            <input type="email" class="field-input" placeholder="you@email.com">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Phone</label>
+            <input type="tel" class="field-input" placeholder="+256 (7XX) XXX XXXX">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Skin / Allergy Notes <span style="color:var(--muted);font-size:0.68rem">(optional)</span></label>
+          <textarea class="field-input" rows="3" placeholder="Any allergies, sensitivities, or special requests we should know about…" style="resize:vertical"></textarea>
+        </div>
+        <div class="field-group">
+          <label class="field-label">How did you hear about us?</label>
+          <div class="select-wrap">
+            <select class="field-select">
+              <option>— Select —</option>
+              <option>Word of mouth</option>
+              <option>Instagram / Social media</option>
+              <option>Google Search</option>
+              <option>A friend's referral</option>
+              <option>Hotel recommendation</option>
+            </select>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" onclick="goStep(3)">← Back</button>
+          <button class="btn-next" onclick="goStep(5)">Review Booking →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Confirm -->
+      <div class="step-panel" id="panel5">
+        <div class="summary-box">
+          <p class="summary-title">Your Reservation Summary</p>
+          <div class="summary-row">
+            <span class="summary-key">Service</span>
+            <span class="summary-val">Grand Ritual</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Duration</span>
+            <span class="summary-val">5 hours</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Suite</span>
+            <span class="summary-val">Private Suite</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Date & Time</span>
+            <span class="summary-val" id="summaryDateTime">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Add-ons</span>
+            <span class="summary-val">Aromatherapy, Parking</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row">
+            <span class="summary-key">Service Total</span>
+            <span class="summary-val">UGX 150,000</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Add-ons</span>
+            <span class="summary-val">UGX 18,000</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Deposit Due Now (20%)</span>
+            <span class="summary-val" style="color:var(--gold)">UGX 33,600</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row summary-total">
+            <span class="summary-key">Total on Day</span>
+            <span class="summary-val">UGX 168,000</span>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.65;margin-bottom:28px">
+          By confirming, you agree to our cancellation policy: full refund if cancelled 48+ hours before your appointment. Late cancellations are charged the deposit.
+        </p>
+        <div class="step-nav">
+          <button class="btn-back" onclick="goStep(4)">← Back</button>
+          <button class="btn-next" onclick="confirmBooking()" style="background:var(--sage);color:white;padding:15px 48px">✦ Confirm & Pay Deposit</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirmation" id="confirmationPanel">
+      <div class="confirm-icon">✓</div>
+      <h3 class="confirm-title">You're booked.</h3>
+      <p class="confirm-sub">Your private suite is reserved and waiting. A confirmation email with all details has been sent to you. We look forward to welcoming you.</p>
+      <div class="confirm-ref">Booking Ref: LUM-<span id="refNum"></span></div>
+      <p style="font-size:0.8rem;color:var(--muted)">Questions? Call us at <strong>+256 701 920 400</strong> or reply to your confirmation email.</p>
+      <button class="btn-ghost" style="margin-top:32px" onclick="resetBooking()">Make Another Reservation</button>
+    </div>
+  </div>
+</section>
+
+<!-- POLICIES -->
+<section style="background:var(--ivory);padding:80px 48px">
+  <div class="section-header">
+    <p class="section-eyebrow">Our promise</p>
+    <h2 class="section-title">Built to <em>protect your journey</em></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px;max-width:1000px;margin:0 auto">
+    <div class="policy-card">
+      <span class="policy-icon">🔒</span>
+      <h4 class="policy-title">Guaranteed Availability</h4>
+      <p class="policy-text">If you see a time slot, it's truly available. We cap daily bookings to ensure every client receives undivided attention.</p>
+    </div>
+    <div class="policy-card">
+      <span class="policy-icon">📍</span>
+      <h4 class="policy-title">No Crowds, Ever</h4>
+      <p class="policy-text">Each suite is booked to one party at a time. Our waiting areas are private and staggered — you'll never share a space with strangers.</p>
+    </div>
+    <div class="policy-card">
+      <span class="policy-icon">⏰</span>
+      <h4 class="policy-title">48-Hour Cancellation</h4>
+      <p class="policy-text">Life happens. Cancel or reschedule up to 48 hours before your appointment for a full deposit refund, no questions asked.</p>
+    </div>
+    <div class="policy-card">
+      <span class="policy-icon">🚗</span>
+      <h4 class="policy-title">Worth the Drive</h4>
+      <p class="policy-text">We know you've traveled. Your appointment is protected from the moment you book — it will never be given away or shortened.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Lumi<span>ère</span></span>
+      <p class="footer-desc">An exclusive sanctuary for extended spa and salon rituals. We believe your time and journey deserve nothing less than absolute certainty and luxury.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Services</p>
+      <a href="#pricing">Grand Ritual</a>
+      <a href="#pricing">Massage</a>
+      <a href="#pricing">Facials</a>
+      <a href="#pricing">Hair</a>
+      <a href="#pricing">Nails</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Visit</p>
+      <a href="#">Location & Parking</a>
+      <a href="#">Hours</a>
+      <a href="#">Gift Cards</a>
+      <a href="#">Memberships</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Connect</p>
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+      <a href="#">+256 701 920 400</a>
+      <a href="#">hello@lumierespa.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Lumière Spa & Salon. All rights reserved.</span>
+    <span>Privacy · Terms · Accessibility</span>
+  </div>
+</footer>
+
+<script>
+  // Set min date to today
+  const di = document.getElementById('dateInput');
+  if(di) { const t = new Date(); di.min = t.toISOString().split('T')[0]; }
+
+  let currentStep = 1;
+  let selectedTime = null;
+
+  function goStep(n) {
+    // Validate step 1
+    if(n > 1 && currentStep === 1) {
+      const svc = document.getElementById('svcSelect').value;
+      const dur = document.getElementById('durationSelect').value;
+      if(!svc || !dur) { alert('Please select a service and duration to continue.'); return; }
+    }
+    // Validate step 2
+    if(n > 2 && currentStep === 2) {
+      const dt = document.getElementById('dateInput').value;
+      if(!dt) { alert('Please select a date for your appointment.'); return; }
+      if(!selectedTime) { alert('Please select an available time slot.'); return; }
+    }
+
+    // Update step panels
+    document.getElementById('panel' + currentStep).classList.remove('active');
+    document.getElementById('panel' + n).classList.add('active');
+
+    // Update progress
+    for(let i = 1; i <= 5; i++) {
+      const ps = document.getElementById('ps' + i);
+      ps.classList.remove('active','done');
+      if(i < n) ps.classList.add('done');
+      if(i === n) ps.classList.add('active');
+    }
+
+    // Update summary date
+    if(n === 5) {
+      const dt = document.getElementById('dateInput').value;
+      const d = document.getElementById('summaryDateTime');
+      if(dt && selectedTime) {
+        const dateStr = new Date(dt + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'});
+        d.textContent = dateStr + ' · ' + selectedTime;
+      }
+    }
+
+    currentStep = n;
+    document.getElementById('bookingBody').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function selectTime(el) {
+    if(el.classList.contains('unavailable')) return;
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedTime = el.textContent.trim();
+  }
+
+  function toggleAddon(el) {
+    el.classList.toggle('selected');
+  }
+
+  function confirmBooking() {
+    document.getElementById('bookingBody').style.display = 'none';
+    const cp = document.getElementById('confirmationPanel');
+    cp.classList.add('active');
+    document.getElementById('refNum').textContent = Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+  }
+
+  function resetBooking() {
+    document.getElementById('confirmationPanel').classList.remove('active');
+    document.getElementById('bookingBody').style.display = 'block';
+    goStep(1);
+    currentStep = 1;
+    selectedTime = null;
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+    document.querySelectorAll('.addon-card').forEach(a => a.classList.remove('selected'));
+    document.getElementById('svcSelect').value = '';
+    document.getElementById('durationSelect').value = '';
+  }
+</script>
+</body>
+</html>
+	
+</body>
+</html>
